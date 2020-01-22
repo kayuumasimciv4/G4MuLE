@@ -4,7 +4,7 @@
 #include "globals.hh"
 #include "G4VPVParameterisation.hh"
 #include <array>
-#include "G4Constants.hh"
+#include "G4PoreN.hh"
 
 class G4VPhysicalVolume;
 
@@ -24,9 +24,6 @@ private:
   std::array<G4double, kNofEmCells> fYCell;
   std::array<G4double, kNofEmCells> fZCell;
   std::array<G4double, kNofEmCells> rXCell;
-  std::array<G4double, kNofEmCells> rYCell;
-  std::array<G4double, kNofEmCells> rErrXCell;
-  std::array<G4double, kNofEmCells> rErrYCell;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

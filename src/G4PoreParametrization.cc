@@ -5,7 +5,7 @@
 #include "G4ThreeVector.hh"
 #include "G4RotationMatrix.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4Constants.hh"
+#include "G4GeometryConstants.hh"
 #include "Randomize.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -13,7 +13,10 @@
 G4PoreParametrization::G4PoreParametrization()
     : G4VPVParameterisation()
 {
-  G4double pore_angle = 2 * asin(pore_size / 2 / curvature_radius) * rad;
+  G4double pore_angle = G4GeometryConstants::Getpore_angle();
+  G4double randomize_fraction = G4GeometryConstants::Getrandomize_fraction();
+  G4double curvature_radius = G4GeometryConstants::Getcurvature_radius();
+  G4double wafer_thickness = G4GeometryConstants::Getcurvature_radius();
 
   G4long seed = 1;
   G4double mu = 0;
@@ -50,10 +53,8 @@ G4PoreParametrization::~G4PoreParametrization()
 void G4PoreParametrization::ComputeTransformation(
     const G4int copyNo, G4VPhysicalVolume *physVol) const
 {
-  double C = (kNofEmRows - 1) / 2;
-  G4double pore_angle = 2 * asin(pore_size / 2 / curvature_radius) * rad;
-
-  G4double plusalpha = (curvature_radius - wafer_thickness / 2) * (1 - cos(sqrt(pow(C, 2) + pow(C, 2)) * pore_angle));
+  G4double pore_angle = G4GeometryConstants::Getpore_angle();
+  G4double plusalpha = G4GeometryConstants::Getboxdiff_length();
 
   G4RotationMatrix *myRot = new G4RotationMatrix();
   myRot->rotateX(rXCell[copyNo] + rErrXCell[copyNo]);

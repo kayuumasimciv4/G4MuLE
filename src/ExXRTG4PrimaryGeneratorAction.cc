@@ -22,7 +22,7 @@
 //
 
 #include "ExXRTG4PrimaryGeneratorAction.hh"
-#include "G4Constants.hh"
+#include "G4GeometryConstants.hh"
 
 #include "G4Event.hh"
 #include "G4ParticleGun.hh"
@@ -63,22 +63,9 @@ ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
 
 void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 {
-  //anEvent->SetUserInformation(new G4XrayUserEventInformation);
-  G4double plate_angle = 10 * cm / curvature_radius * rad;
-
-  //G4double pos_X = curvature_radius * sin((9 * cm) / (2 * curvature_radius)) * 2 * (G4UniformRand() - 0.5);
-  //G4double pos_Y = curvature_radius * sin((9 * cm) / (2 * curvature_radius)) * 2 * (G4UniformRand() - 0.5);
-  //G4double pos_X = 0;
-  //G4double pos_Y = 0;
-
-  /*
-  G4double pos_X_id22 = pos_X * cos(2 * plate_angle) + focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2));
-  G4double pos_Y_id22 = pos_Y * cos(2 * plate_angle) + focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2));
-  G4double pos_Z_id22 = focal_length * cos(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)) - tan(2 * plate_angle) * pos_X - tan(2 * plate_angle) * pos_Y;
-  */
-
-  //auto aim_at = G4ThreeVector(pos_X, pos_Y, focal_length);
-  //auto aim_at = G4ThreeVector(pos_X_id22, pos_Y_id22, pos_Z_id22);
+  G4double plate_angle = G4GeometryConstants::Getplate_angle();
+  G4double effarea_size = G4GeometryConstants::Geteffarea_size();
+  G4double focal_length = G4GeometryConstants::Getfocal_length();
 
   G4ThreeVector p1, p2, p3, zeropoint;
   switch (plateid)

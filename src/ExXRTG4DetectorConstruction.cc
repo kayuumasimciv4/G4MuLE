@@ -41,7 +41,8 @@
 #include "G4PoreParametrization.hh"
 #include "G4LogicalSkinSurface.hh"
 #include "G4XraySpecularReflectingSurface.hh"
-#include "G4Constants.hh"
+#include "G4PoreN.hh"
+#include "G4GeometryConstants.hh"
 #include "G4SpokeParametrization.hh"
 
 ExXRTG4DetectorConstruction::ExXRTG4DetectorConstruction(G4XraySpecularReflectingSurface *property)
@@ -54,6 +55,17 @@ ExXRTG4DetectorConstruction::~ExXRTG4DetectorConstruction()
 
 G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
 {
+
+  G4double plusalpha = G4GeometryConstants::Getboxdiff_length();
+  G4double focal_length = G4GeometryConstants::Getfocal_length();
+  G4double wafer_thickness = G4GeometryConstants::Getwafer_thickness();
+  G4double curvature_radius = G4GeometryConstants::Getcurvature_radius();
+  G4double spoke_width = G4GeometryConstants::Getspoke_width();
+  G4double spoke_thickness = G4GeometryConstants::Getspoke_thickness();
+  G4double pore_size = G4GeometryConstants::Getpore_size();
+  G4double hole_size = G4GeometryConstants::Gethole_size();
+  G4double plate_angle = G4GeometryConstants::Getplate_angle();
+
   G4Material *vacuum = new G4Material("Vacuum", 1.0, 1.01 * g / mole, 1.0E-25 * g / cm3,
                                       kStateGas, 2.73 * kelvin, 3.0E-18 * pascal);
   G4Material *si = new G4Material("si", 14, 28.0855 * g / mole, 2.329 * g / cm3);
@@ -82,10 +94,6 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
 
   //---------------------------------------
 
-  double C = (kNofEmRows - 1) / 2;
-  G4double pore_angle = 2 * asin(pore_size / 2 / curvature_radius) * rad;
-  G4double plusalpha = (curvature_radius - wafer_thickness / 2) * (1 - cos(sqrt(pow(C, 2) + pow(C, 2)) * pore_angle));
-
   //spoke placement
   G4VSolid *Spoke_World_S = new G4Box("Spoke_W_S", kNofEmColumns * pore_size / 2, kNofEmRows * pore_size / 2, spoke_thickness / 2);
   G4LogicalVolume *Spoke_World_L = new G4LogicalVolume(Spoke_World_S, vacuum, "Spoke_World_L");
@@ -107,11 +115,10 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   G4VSolid *LEOpticsWorldSolid = new G4Box("LEOpticsWorldSolid", kNofEmColumns * pore_size / 2, kNofEmRows * pore_size / 2, (wafer_thickness + plusalpha) / 2);
   G4LogicalVolume *LEOpticsWorldLog = new G4LogicalVolume(LEOpticsWorldSolid, vacuum, "LEOpticsWorldLog");
 
-  for (auto plateid = 0; plateid < 3; plateid++)
+  for (auto plateid = 0; plateid < 1; plateid++)
   {
-    G4double plate_angle = 10 * cm / curvature_radius * rad;
     G4double spoke_Z_default = focal_length + wafer_thickness / 2 + plusalpha / 2 + spoke_thickness / 2;
-    G4double spoke_curvature_radius = (curvature_radius + (wafer_thickness + plusalpha + spoke_thickness) / 2);
+    //G4double spoke_curvature_radius = (curvature_radius + (wafer_thickness + plusalpha + spoke_thickness) / 2);
     G4RotationMatrix myRot_plate = G4RotationMatrix();
     G4ThreeVector position_plate;
     G4ThreeVector position_spoke;

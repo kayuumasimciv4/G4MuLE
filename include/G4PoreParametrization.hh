@@ -4,7 +4,7 @@
 #include "globals.hh"
 #include "G4VPVParameterisation.hh"
 #include <array>
-#include "G4Constants.hh"
+#include "G4PoreN.hh"
 
 class G4VPhysicalVolume;
 
