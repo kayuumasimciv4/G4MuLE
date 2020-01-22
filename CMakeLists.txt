@@ -46,10 +46,12 @@ target_link_libraries(g4MuLE ${Geant4_LIBRARIES})
 set(G4MuLE_SCRIPTS
   Vacuum.dat
   si.dat
- pt.dat
- al.dat
-ir.dat
+  pt.dat
+  al.dat
+  ir.dat
   vis.mac
+  init_vis.mac
+  gui.mac
 
   )
 
