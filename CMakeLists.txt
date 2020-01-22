@@ -35,8 +35,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleB1 exampleB1.cc ${sources} ${headers})
-target_link_libraries(exampleB1 ${Geant4_LIBRARIES})
+add_executable(g4MuLE g4MuLE.cc ${sources} ${headers})
+target_link_libraries(g4MuLE ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -50,7 +50,7 @@ set(G4MuLE_SCRIPTS
  al.dat
 ir.dat
   vis.mac
-  
+
   )
 
 foreach(_script ${G4MuLE_SCRIPTS})
