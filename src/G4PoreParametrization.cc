@@ -16,11 +16,12 @@ G4PoreParametrization::G4PoreParametrization()
   G4double pore_angle = G4GeometryConstants::Getpore_angle();
   G4double randomize_fraction = G4GeometryConstants::Getrandomize_fraction();
   G4double curvature_radius = G4GeometryConstants::Getcurvature_radius();
-  G4double wafer_thickness = G4GeometryConstants::Getcurvature_radius();
+  G4double wafer_thickness = G4GeometryConstants::Getwafer_thickness();
 
   G4long seed = 1;
   G4double mu = 0;
   G4double sigma = pore_angle * randomize_fraction;
+
   CLHEP::HepRandom::setTheSeed(seed);
 
   for (auto copyNo = 0; copyNo < kNofEmCells; copyNo++)

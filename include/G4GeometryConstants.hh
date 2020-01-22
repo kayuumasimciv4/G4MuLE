@@ -1,20 +1,13 @@
 #ifndef G4GeometryConstants_hh
 #define G4GeometryConstants_hh 1
 #include "globals.hh"
-#include "math.h"
 #include "G4SystemOfUnits.hh"
+#include "G4PoreN.hh"
 class G4GeometryConstants
 {
 public:
   G4GeometryConstants();
   virtual ~G4GeometryConstants();
-  static void SetkNofEmColumns(G4int val) { kNofEmColumns = val; };
-  static G4int GetkNofEmColumns() { return kNofEmColumns; };
-
-  static void SetkNofEmRows(G4int val) { kNofEmRows = val; };
-  static G4int GetkNofEmRows() { return kNofEmRows; };
-
-  static G4int GetkNofEmCells() { return kNofEmCells * kNofEmRows; };
 
   static void Setfocal_length(G4double val) { focal_length = val; };
   static G4double Getfocal_length() { return focal_length; };
@@ -54,10 +47,6 @@ public:
   }
 
 private:
-  static G4int kNofEmColumns;
-  static G4int kNofEmRows;
-  static G4int kNofEmCells;
-  static G4int kNofspokeCells;
   static G4double focal_length;
   static G4double wafer_thickness;
   static G4double curvature_radius;
