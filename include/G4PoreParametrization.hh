@@ -5,6 +5,7 @@
 #include "G4VPVParameterisation.hh"
 #include <array>
 #include "G4PoreN.hh"
+#include "G4SystemOfUnits.hh"
 
 class G4VPhysicalVolume;
 
@@ -13,20 +14,24 @@ class G4VPhysicalVolume;
 class G4PoreParametrization : public G4VPVParameterisation
 {
 public:
-  G4PoreParametrization();
+  G4PoreParametrization(G4double phaseangle = 10 * deg);
   virtual ~G4PoreParametrization();
 
-  virtual void ComputeTransformation(
-      const G4int copyNo, G4VPhysicalVolume *physVol) const;
+  virtual void ComputeTransformation(const G4int copyNo, G4VPhysicalVolume *physVol) const;
+  virtual G4double GetcellN() { return cellN; };
 
 private:
+  int cellN;
+  G4double phase_angle;
   std::array<G4double, kNofEmCells> fXCell;
   std::array<G4double, kNofEmCells> fYCell;
-  std::array<G4double, kNofEmCells> fZCell;
-  std::array<G4double, kNofEmCells> rXCell;
-  std::array<G4double, kNofEmCells> rYCell;
-  std::array<G4double, kNofEmCells> rErrXCell;
-  std::array<G4double, kNofEmCells> rErrYCell;
+  G4double *fxcell;
+  G4double *fycell;
+  G4double *fzcell;
+  G4double *rxcell;
+  G4double *rycell;
+  G4double *rerrxcell;
+  G4double *rerrycell;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

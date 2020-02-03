@@ -65,6 +65,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   G4double pore_size = G4GeometryConstants::Getpore_size();
   G4double hole_size = G4GeometryConstants::Gethole_size();
   G4double plate_angle = G4GeometryConstants::Getplate_angle();
+  G4double effarea_size = G4GeometryConstants::Geteffarea_size();
 
   G4Material *vacuum = new G4Material("Vacuum", 1.0, 1.01 * g / mole, 1.0E-25 * g / cm3,
                                       kStateGas, 2.73 * kelvin, 3.0E-18 * pascal);
@@ -112,7 +113,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   }
   //---------------------------------------
 
-  G4VSolid *LEOpticsWorldSolid = new G4Box("LEOpticsWorldSolid", kNofEmColumns * pore_size / 2, kNofEmRows * pore_size / 2, (wafer_thickness + plusalpha) / 2);
+  G4VSolid *LEOpticsWorldSolid = new G4Box("LEOpticsWorldSolid", effarea_size / 2, effarea_size / 2, (wafer_thickness + plusalpha) / 2);
   G4LogicalVolume *LEOpticsWorldLog = new G4LogicalVolume(LEOpticsWorldSolid, vacuum, "LEOpticsWorldLog");
 
   for (auto plateid = 0; plateid < 1; plateid++)
@@ -292,8 +293,9 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   new G4LogicalSkinSurface("TargetPtSurface", Si_Pore, xray_surface_property);
 
   //SiPore placement
-  G4VPVParameterisation *poreParam = new G4PoreParametrization();
-  new G4PVParameterised("Si_Wafer", Si_Pore, LEOpticsWorldLog, kXAxis, kNofEmCells, poreParam);
+  G4PoreParametrization *poreParam = new G4PoreParametrization();
+  int cellN = poreParam->GetcellN();
+  new G4PVParameterised("Si_Wafer", Si_Pore, LEOpticsWorldLog, kXAxis, cellN, poreParam);
 
   //targetbox placement
   G4Box *targetbox = new G4Box("targetbox", 20. * cm, 20. * cm, 2. * cm); //its size
@@ -310,8 +312,8 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   Spoke_World_L->SetVisAttributes(copperVisAttributes);
 
   //LEOpticsWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
-  Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
-  //Si_Pore->SetVisAttributes(copperVisAttributes);
+  //Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
+  Si_Pore->SetVisAttributes(copperVisAttributes);
   TargetBoxWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
 
   //targetbox_Log->SetVisAttributes(copperVisAttributes);
