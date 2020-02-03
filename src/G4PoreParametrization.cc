@@ -29,7 +29,6 @@ G4PoreParametrization::G4PoreParametrization(G4double phaseangle)
 
   for (auto copyNo = 0; copyNo < kNofEmCells; copyNo++)
   {
-
     auto column = copyNo / kNofEmRows;
     auto row = copyNo % kNofEmRows;
     double C = (-column + (kNofEmRows - 1) / 2);
@@ -50,10 +49,9 @@ G4PoreParametrization::G4PoreParametrization(G4double phaseangle)
   rycell = new G4double[cellN];
   rerrxcell = new G4double[cellN];
   rerrycell = new G4double[cellN];
-  int _copyNo = 0;
+  G4int _copyNo = 0;
   for (auto copyNo = 0; copyNo < kNofEmCells; copyNo++)
   {
-
     auto column = copyNo / kNofEmRows;
     auto row = copyNo % kNofEmRows;
     double C = (-column + (kNofEmRows - 1) / 2);
@@ -70,8 +68,8 @@ G4PoreParametrization::G4PoreParametrization(G4double phaseangle)
       fzcell[_copyNo] = (curvature_radius - wafer_thickness / 2) * (1 - cos(sqrt(pow(C, 2) + pow(R, 2)) * pore_angle));
       rxcell[_copyNo] = C * pore_angle;
       rycell[_copyNo] = -R * pore_angle;
-      rerrxcell[copyNo] = G4RandGauss::shoot(mu, sigma);
-      rerrycell[copyNo] = G4RandGauss::shoot(mu, sigma);
+      rerrxcell[_copyNo] = G4RandGauss::shoot(mu, sigma);
+      rerrycell[_copyNo] = G4RandGauss::shoot(mu, sigma);
       _copyNo += 1;
     }
   }

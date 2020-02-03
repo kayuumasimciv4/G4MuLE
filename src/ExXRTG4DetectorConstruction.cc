@@ -293,7 +293,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   new G4LogicalSkinSurface("TargetPtSurface", Si_Pore, xray_surface_property);
 
   //SiPore placement
-  G4PoreParametrization *poreParam = new G4PoreParametrization();
+  G4PoreParametrization *poreParam = new G4PoreParametrization(20 * deg);
   int cellN = poreParam->GetcellN();
   new G4PVParameterised("Si_Wafer", Si_Pore, LEOpticsWorldLog, kXAxis, cellN, poreParam);
 
@@ -312,8 +312,8 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   Spoke_World_L->SetVisAttributes(copperVisAttributes);
 
   //LEOpticsWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
-  //Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
-  Si_Pore->SetVisAttributes(copperVisAttributes);
+  Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
+  //Si_Pore->SetVisAttributes(copperVisAttributes);
   TargetBoxWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
 
   //targetbox_Log->SetVisAttributes(copperVisAttributes);

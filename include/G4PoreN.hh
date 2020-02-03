@@ -4,10 +4,10 @@
 
 #include "globals.hh"
 
-//constexpr G4int kNofEmColumns = 2885; //9cm*(cos(20deg)+sin(20deg))/40um
-//constexpr G4int kNofEmRows = 2885;    //9cm*(cos(20deg)+sin(20deg))/40um
-constexpr G4int kNofEmColumns = 11; //for test
-constexpr G4int kNofEmRows = 11;    //for test
+constexpr G4int kNofEmColumns = 2885; //9cm*(cos(20deg)+sin(20deg))/40um
+constexpr G4int kNofEmRows = 2885;    //9cm*(cos(20deg)+sin(20deg))/40um
+//constexpr G4int kNofEmColumns = 11; //for test
+//constexpr G4int kNofEmRows = 11;    //for test
 
 constexpr G4int kNofEmCells = kNofEmColumns * kNofEmRows;
 constexpr G4int kNofspokeCells = 3000;

@@ -43,7 +43,8 @@ public:
   static G4double Getplate_angle() { return plate_size / curvature_radius * rad; };
   static G4double Getboxdiff_length()
   {
-    return (curvature_radius - wafer_thickness / 2) * (1 - cos(sqrt(pow((kNofEmRows - 1) / 2, 2) + pow((kNofEmRows - 1) / 2, 2)) * Getpore_angle()));
+    //return (curvature_radius - wafer_thickness / 2) * (1 - cos(sqrt(pow((kNofEmRows - 1) / 2, 2) + pow((kNofEmRows - 1) / 2, 2)) * Getpore_angle()));
+    return (Getcurvature_radius() - Getwafer_thickness() / 2) * (1 - cos(asin(Geteffarea_size() * sqrt(2) / 2 / Getcurvature_radius())));
   }
 
 private:

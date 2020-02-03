@@ -14,17 +14,15 @@ class G4VPhysicalVolume;
 class G4PoreParametrization : public G4VPVParameterisation
 {
 public:
-  G4PoreParametrization(G4double phaseangle = 10 * deg);
+  G4PoreParametrization(G4double phaseangle = 0 * deg);
   virtual ~G4PoreParametrization();
 
   virtual void ComputeTransformation(const G4int copyNo, G4VPhysicalVolume *physVol) const;
   virtual G4double GetcellN() { return cellN; };
 
 private:
-  int cellN;
+  G4int cellN;
   G4double phase_angle;
-  std::array<G4double, kNofEmCells> fXCell;
-  std::array<G4double, kNofEmCells> fYCell;
   G4double *fxcell;
   G4double *fycell;
   G4double *fzcell;
