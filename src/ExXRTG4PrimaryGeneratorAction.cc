@@ -70,6 +70,7 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
   G4ThreeVector p1, p2, p3, zeropoint;
   switch (plateid)
   {
+  default:
   case 0:
     p1 = G4ThreeVector(-effarea_size / 2, -effarea_size / 2, 0);
     p2 = G4ThreeVector(effarea_size / 2, -effarea_size / 2, 0);
@@ -79,7 +80,7 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
   case 1:
     p1 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2, effarea_size / 2 * sin(2 * plate_angle));
     p2 = G4ThreeVector(effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2, -effarea_size / 2 * sin(2 * plate_angle));
-    p3 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2, effarea_size * sin(2 * plate_angle));
+    p3 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2, effarea_size / 2 * sin(2 * plate_angle));
     zeropoint = G4ThreeVector(focal_length * sin(2 * plate_angle),
                               0,
                               focal_length * cos(2 * plate_angle));
@@ -93,12 +94,58 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
                               focal_length * cos(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)));
     break;
 
-  default:
-    p1 = G4ThreeVector(0, 0, 0);
-    p2 = G4ThreeVector(0, 0, 0);
-    p3 = G4ThreeVector(0, 0, 0);
-    zeropoint = G4ThreeVector(0, 0, 0);
+  case 3:
+    p1 = G4ThreeVector(-effarea_size / 2, -effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * sin(2 * plate_angle));
+    p2 = G4ThreeVector(-effarea_size / 2, effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * sin(2 * plate_angle));
+    p3 = G4ThreeVector(effarea_size / 2, -effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * sin(2 * plate_angle));
+    zeropoint = G4ThreeVector(0,
+                              focal_length * sin(2 * plate_angle),
+                              focal_length * cos(2 * plate_angle));
+    break;
 
+  case 4:
+    p1 = G4ThreeVector(effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * sqrt(2) * sin(2 * plate_angle));
+    p2 = G4ThreeVector(effarea_size / 2, effarea_size / 2, 0);
+    p3 = G4ThreeVector(-effarea_size / 2, -effarea_size / 2, 0);
+    zeropoint = G4ThreeVector(-focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              focal_length * cos(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)));
+    break;
+
+  case 5:
+    p1 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2, -effarea_size / 2 * sin(2 * plate_angle));
+    p2 = G4ThreeVector(effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2, effarea_size / 2 * sin(2 * plate_angle));
+    p3 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2, -effarea_size / 2 * sin(2 * plate_angle));
+    zeropoint = G4ThreeVector(-focal_length * sin(2 * plate_angle),
+                              0,
+                              focal_length * cos(2 * plate_angle));
+    break;
+
+  case 6:
+    p1 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * sqrt(2) * sin(2 * plate_angle));
+    p2 = G4ThreeVector(effarea_size / 2, -effarea_size / 2, 0);
+    p3 = G4ThreeVector(-effarea_size / 2, effarea_size / 2, 0);
+    zeropoint = G4ThreeVector(-focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              -focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              focal_length * cos(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)));
+    break;
+
+  case 7:
+    p1 = G4ThreeVector(-effarea_size / 2, -effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * sin(2 * plate_angle));
+    p2 = G4ThreeVector(-effarea_size / 2, effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * sin(2 * plate_angle));
+    p3 = G4ThreeVector(effarea_size / 2, -effarea_size / 2 * cos(2 * plate_angle), -effarea_size / 2 * sin(2 * plate_angle));
+    zeropoint = G4ThreeVector(0,
+                              -focal_length * sin(2 * plate_angle),
+                              focal_length * cos(2 * plate_angle));
+    break;
+
+  case 8:
+    p1 = G4ThreeVector(-effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * cos(2 * plate_angle), effarea_size / 2 * sqrt(2) * sin(2 * plate_angle));
+    p2 = G4ThreeVector(effarea_size / 2, effarea_size / 2, 0);
+    p3 = G4ThreeVector(-effarea_size / 2, -effarea_size / 2, 0);
+    zeropoint = G4ThreeVector(focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              -focal_length * sin(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)),
+                              focal_length * cos(2 * plate_angle) / sqrt(1 + pow(sin(2 * plate_angle), 2)));
     break;
   }
 
