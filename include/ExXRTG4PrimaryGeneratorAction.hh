@@ -26,11 +26,14 @@
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "globals.hh"
+#include "IParticleSource.hh"
+#include "PointSource.hh"
 
 class G4ParticleDefinition;
 class G4Event;
 class G4ParticleGun;
 class G4GenericMessenger;
+class IParticleSource;
 
 class ExXRTG4PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
@@ -58,6 +61,7 @@ private:
   G4double angle_x;
   G4double angle_y;
   G4int plateid;
+  IParticleSource *source;
 };
 
 #endif // EXXRTG4PRIMARYGENERATORACTION_HH
