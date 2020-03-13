@@ -7,6 +7,7 @@ class PointSource : public IParticleSource
 {
 public:
   PointSource(G4double anglex, G4double angley, G4int plateid);
+  virtual void Update(G4double anglex, G4double angley, G4int plateid);
   virtual G4ThreeVector GetParticleMomentum();
   virtual G4ThreeVector GetParticlePosition();
 

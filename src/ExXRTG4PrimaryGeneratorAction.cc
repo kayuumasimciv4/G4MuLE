@@ -68,7 +68,7 @@ ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
 
 void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 {
-
+  source->Update(angle_x, angle_y, plateid);
   auto dir = source->GetParticleMomentum();
   auto start = source->GetParticlePosition();
 

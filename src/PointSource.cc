@@ -10,6 +10,12 @@ PointSource::PointSource(G4double ax, G4double ay, G4int pi)
   SetCenterAngle_Y(ay);
   SetPlateID(pi);
 };
+void PointSource::Update(G4double ax, G4double ay, G4int pi)
+{
+  SetCenterAngle_X(ax);
+  SetCenterAngle_Y(ay);
+  SetPlateID(pi);
+};
 
 G4ThreeVector PointSource::GetParticleMomentum()
 {

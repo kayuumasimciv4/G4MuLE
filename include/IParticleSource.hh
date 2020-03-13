@@ -5,6 +5,7 @@ class IParticleSource
 {
 public:
   virtual ~IParticleSource(){};
+  virtual void Update(G4double anglex, G4double angley, G4int plateid) = 0;
 
   virtual G4ThreeVector GetParticleMomentum() = 0;
   virtual G4ThreeVector GetParticlePosition() = 0;
