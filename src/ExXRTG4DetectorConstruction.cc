@@ -339,8 +339,8 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   Spoke_World_L->SetVisAttributes(copperVisAttributes);
 
   //LEOpticsWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
-  //Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
-  Si_Pore->SetVisAttributes(copperVisAttributes);
+  Si_Pore->SetVisAttributes(G4VisAttributes::Invisible);
+  //Si_Pore->SetVisAttributes(copperVisAttributes);
   TargetBoxWorldLog->SetVisAttributes(G4VisAttributes::Invisible);
 
   //targetbox_Log->SetVisAttributes(copperVisAttributes);
