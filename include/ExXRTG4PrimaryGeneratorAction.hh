@@ -47,10 +47,12 @@ public:
   G4double GetMomentum() const { return energy; }
 
   void SetAngleX(G4double val) { angle_x = val; }
-  G4double GetAngleX() const { return angle_x; }
+  G4double GetAngleX() { return angle_x; }
 
   void SetAngleY(G4double val) { angle_y = val; }
   G4double GetAngleY() const { return angle_y; }
+
+  IParticleSource *GetSource() { return source; };
 
 private:
   void DefineCommands();

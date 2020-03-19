@@ -4,17 +4,19 @@
 #include <G4ThreeVector.hh>
 #include "Randomize.hh"
 
-PointSource::PointSource(G4double ax, G4double ay, G4int pi)
+PointSource::PointSource(G4double ax, G4double ay, G4double en, G4int pi)
 {
   SetCenterAngle_X(ax);
   SetCenterAngle_Y(ay);
   SetPlateID(pi);
+  SetMonoEnergy(en);
 };
-void PointSource::Update(G4double ax, G4double ay, G4int pi)
+void PointSource::Update(G4double ax, G4double ay, G4double en, G4int pi)
 {
   SetCenterAngle_X(ax);
   SetCenterAngle_Y(ay);
   SetPlateID(pi);
+  SetMonoEnergy(en);
 };
 
 G4ThreeVector PointSource::GetParticleMomentum()

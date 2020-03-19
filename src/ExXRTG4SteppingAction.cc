@@ -30,14 +30,15 @@
 #include "G4RunManager.hh"
 #include "G4XrayUserEventInformation.hh"
 #include "G4XrayUserTrackInformation.hh"
-#include "G4GenericMessenger.hh"
+#include "G4UserRunAction.hh"
+#include "G4MuLERunAction.hh"
 
 ExXRTG4SteppingAction::ExXRTG4SteppingAction()
-    : G4UserSteppingAction(),
-      fMessenger(nullptr),
-      outputname("text.txt")
+    : G4UserSteppingAction()
 {
-  DefineCommands();
+  auto runmanager = G4RunManager::GetRunManager();
+  auto runaction = const_cast<G4UserRunAction *>(runmanager->GetUserRunAction());
+  runaction_u = dynamic_cast<G4MuLERunAction *>(runaction);
 }
 ExXRTG4SteppingAction::~ExXRTG4SteppingAction() {}
 void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
@@ -48,13 +49,9 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
   G4XrayUserTrackInformation *track_info = dynamic_cast<G4XrayUserTrackInformation *>(aTrack->GetUserInformation());
   const std::vector<G4XrayUserTrackInformation::interaction_data_t> &data = track_info->GetTrackInformation();
 
-  //------------------------------------------
-  //std::string filename = "test.txt";
-  std::string Dirname = "Data";
-  auto filename = outputname;
-
+  auto filepath = runaction_u->GetDirName() + "/" + runaction_u->GetFileName();
   std::ofstream writing_file;
-  writing_file.open(Dirname + "/" + filename, std::ios::app);
+  writing_file.open(filepath, std::ios::app);
   double lx, ly;
 
   for (size_t k = 0; k != data.size(); ++k)
@@ -72,17 +69,4 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
       writing_file << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << k << " " << lx << " " << ly << std::endl;
     }
   }
-}
-void ExXRTG4SteppingAction::DefineCommands()
-{
-
-  fMessenger = new G4GenericMessenger(this,
-                                      "/B1/stepaction/",
-                                      "Primary stepping action control");
-
-  auto &outnameCmd = fMessenger->DeclareProperty("outputname", outputname,
-                                                 "output file name.");
-
-  outnameCmd.SetParameterName("t", true);
-  outnameCmd.SetDefaultValue("test.txt");
 }

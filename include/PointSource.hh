@@ -6,21 +6,24 @@
 class PointSource : public IParticleSource
 {
 public:
-  PointSource(G4double anglex, G4double angley, G4int plateid);
-  virtual void Update(G4double anglex, G4double angley, G4int plateid);
+  PointSource(G4double anglex, G4double angley, G4double energy, G4int plateid);
+  virtual void Update(G4double anglex, G4double angley, G4double energy, G4int plateid);
   virtual G4ThreeVector GetParticleMomentum();
   virtual G4ThreeVector GetParticlePosition();
 
   void SetCenterAngle_X(G4double ax) { centerangle_x = ax; };
-  G4double GetCenterAngle_X() { return centerangle_x; };
+  virtual G4double GetCenterAngle_X() { return centerangle_x; };
   void SetCenterAngle_Y(G4double ay) { centerangle_y = ay; };
-  G4double GetCenterAngle_Y() { return centerangle_y; };
+  virtual G4double GetCenterAngle_Y() { return centerangle_y; };
   void SetPlateID(G4int n) { plateid = n; };
-  G4int GetPlateID() { return plateid; };
+  virtual G4int GetPlateID() { return plateid; };
+  void SetMonoEnergy(G4double en) { energy = en; };
+  virtual G4double GetParticleEnergy() { return energy; };
 
 private:
   G4double centerangle_x;
   G4double centerangle_y;
+  G4double energy;
   G4int plateid;
 };
 

@@ -52,7 +52,7 @@ ExXRTG4PrimaryGeneratorAction::ExXRTG4PrimaryGeneratorAction()
   G4int nofParticles = 1;
   particleGun = new G4ParticleGun(nofParticles);
   G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
-  source = new PointSource(angle_x, angle_y, plateid);
+  source = new PointSource(angle_x, angle_y, energy, plateid);
 
   fgamma = particleTable->FindParticle("gamma");
   particleGun->SetParticleDefinition(fgamma);
@@ -61,6 +61,9 @@ ExXRTG4PrimaryGeneratorAction::ExXRTG4PrimaryGeneratorAction()
 
 ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
 {
+  std::cout << "Destruct PrimaryGeneratorAction" << std::endl;
+  std::cout << source << std::endl;
+
   delete source;
   delete particleGun;
   delete fMessenger;
@@ -68,7 +71,8 @@ ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
 
 void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 {
-  source->Update(angle_x, angle_y, plateid);
+  source->Update(angle_x, angle_y, energy, plateid);
+
   auto dir = source->GetParticleMomentum();
   auto start = source->GetParticlePosition();
 

@@ -25,6 +25,7 @@
 #define EXXRTG4STEPPINGACTION_HH 1
 
 #include "G4UserSteppingAction.hh"
+#include "G4MuLERunAction.hh"
 class G4GenericMessenger;
 class G4Step;
 
@@ -34,11 +35,7 @@ public:
   ExXRTG4SteppingAction();
   ~ExXRTG4SteppingAction();
   void UserSteppingAction(const G4Step *);
-
-private:
-  void DefineCommands();
-  G4GenericMessenger *fMessenger;
-  std::string outputname;
+  G4MuLERunAction *runaction_u;
 };
 
 #endif // EXXRTG4STEPPINGACTION_HH
