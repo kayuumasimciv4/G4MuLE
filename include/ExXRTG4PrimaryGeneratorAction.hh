@@ -52,7 +52,12 @@ public:
   void SetAngleY(G4double val) { angle_y = val; }
   G4double GetAngleY() const { return angle_y; }
 
-  IParticleSource *GetSource() { return source; };
+  G4int GetPlateID() const { return plateid; };
+
+  IParticleSource *GetSource()
+  {
+    return source;
+  };
 
 private:
   void DefineCommands();

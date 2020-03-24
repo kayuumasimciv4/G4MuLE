@@ -41,6 +41,7 @@ void G4MuLERunAction::BeginOfRunAction(const G4Run *)
   G4VUserPrimaryGeneratorAction *pgene = const_cast<G4VUserPrimaryGeneratorAction *>(runmanager->GetUserPrimaryGeneratorAction());
   ExXRTG4PrimaryGeneratorAction *pgenec = dynamic_cast<ExXRTG4PrimaryGeneratorAction *>(pgene);
   auto source = pgenec->GetSource();
+  source->Update(pgenec->GetAngleX(), pgenec->GetAngleY(), pgenec->GetMomentum(), pgenec->GetPlateID());
   auto ax = source->GetCenterAngle_X();
   auto ay = source->GetCenterAngle_Y();
   auto en = source->GetParticleEnergy();
