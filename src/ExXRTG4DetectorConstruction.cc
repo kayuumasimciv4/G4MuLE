@@ -96,11 +96,11 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   //---------------------------------------
 
   //spoke placement
-  G4VSolid *Spoke_World_S = new G4Box("Spoke_W_S", 9 * cm / 2, 9 * cm / 2, spoke_thickness / 2);
+  G4VSolid *Spoke_World_S = new G4Box("Spoke_W_S", effarea_size / 2, effarea_size / 2, spoke_thickness / 2);
 
   G4LogicalVolume *Spoke_World_L = new G4LogicalVolume(Spoke_World_S, vacuum, "Spoke_World_L");
 
-  G4VSolid *Spoke_S = new G4Box("Spoke_S", 9 * sqrt(2) * cm / 2, spoke_width / 2, spoke_thickness / 2);
+  G4VSolid *Spoke_S = new G4Box("Spoke_S", effarea_size * sqrt(2) / 2, spoke_width / 2, spoke_thickness / 2);
   Spoke_L = new G4LogicalVolume(Spoke_S, si, "Spoke_L");
   new G4LogicalSkinSurface("SpokeSurface", Spoke_L, xray_surface_property);
 

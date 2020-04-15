@@ -6,6 +6,10 @@
 
 constexpr G4int kNofEmColumns = 3183; //9cm*(cos(45deg)+sin(45deg))/40um
 constexpr G4int kNofEmRows = 3183;    //9cm*(cos(45deg)+sin(45deg))/40um
+
+//constexpr G4int kNofEmColumns = 1061; //3cm*(cos(45deg)+sin(45deg))/40um
+//constexpr G4int kNofEmRows = 1061;    //3cm*(cos(45deg)+sin(45deg))/40um
+
 //constexpr G4int kNofEmColumns = 31; //for test
 //constexpr G4int kNofEmRows = 31;    //for test
 

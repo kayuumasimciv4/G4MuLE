@@ -6,6 +6,8 @@
 #include "PointSource.hh"
 #include "ExXRTG4PrimaryGeneratorAction.hh"
 
+#include <Randomize.hh>
+
 #include <iostream>
 #include <string>  // useful for reading and writing
 #include <fstream> // ifstream, ofstream
@@ -51,10 +53,11 @@ void G4MuLERunAction::BeginOfRunAction(const G4Run *)
   std::ofstream writing_file;
   writing_file.open(dirname + "/" + filename, std::ios::trunc);
   writing_file << "########## GeneratedPhotonInfo ##########" << std::endl;
+  writing_file << "seed: " << G4Random::getTheSeed() << std::endl;
   writing_file << "TotalPhoton: " << Nevent << std::endl;
-  writing_file << "IncidentAngleX [rad]: " << ax << std::endl;
-  writing_file << "IncidentAngleY [rad]: " << ay << std::endl;
-  writing_file << "SettingEnergy [MeV]: " << en << std::endl;
+  writing_file << "IncidentAngleX[rad]: " << ax << std::endl;
+  writing_file << "IncidentAngleY[rad]: " << ay << std::endl;
+  writing_file << "SettingEnergy[MeV]: " << en << std::endl;
   writing_file << "FocusedPlateID: " << pid << std::endl;
   writing_file << "########## LEopticsGeometoryInfo [mm] ##########" << std::endl;
   writing_file << "FocalLength: " << G4GeometryConstants::Getfocal_length() << std::endl;
