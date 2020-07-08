@@ -26,6 +26,7 @@
 
 #include "G4UserSteppingAction.hh"
 #include "G4MuLERunAction.hh"
+#include "ExXRTG4DetectorConstruction.hh"
 class G4GenericMessenger;
 class G4Step;
 
@@ -36,6 +37,7 @@ public:
   ~ExXRTG4SteppingAction();
   void UserSteppingAction(const G4Step *);
   G4MuLERunAction *runaction_u;
+  G4LogicalVolume *fScoringVolume;
 };
 
 #endif // EXXRTG4STEPPINGACTION_HH

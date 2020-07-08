@@ -328,6 +328,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
   G4Box *targetbox = new G4Box("targetbox", 20. * cm, 20. * cm, 2. * cm); //its size
   G4LogicalVolume *targetbox_Log = new G4LogicalVolume(targetbox, si, "targetbox_Log");
   new G4PVPlacement(0, G4ThreeVector(0, 0, 0 * cm), targetbox_Log, "target", TargetBoxWorldLog, false, 0, 0);
+  fScoringVolume = targetbox_Log;
 
   //auto visAttributes = new G4VisAttributes(G4Colour(0.7, 0.4, 0.1));
   //visAttributes->SetVisibility(false);

@@ -32,9 +32,11 @@
 #include "G4XrayUserTrackInformation.hh"
 #include "G4UserRunAction.hh"
 #include "G4MuLERunAction.hh"
+#include "ExXRTG4DetectorConstruction.hh"
 
 ExXRTG4SteppingAction::ExXRTG4SteppingAction()
-    : G4UserSteppingAction()
+    : G4UserSteppingAction(),
+      fScoringVolume(0)
 {
   auto runmanager = G4RunManager::GetRunManager();
   auto runaction = const_cast<G4UserRunAction *>(runmanager->GetUserRunAction());
@@ -43,6 +45,21 @@ ExXRTG4SteppingAction::ExXRTG4SteppingAction()
 ExXRTG4SteppingAction::~ExXRTG4SteppingAction() {}
 void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
 {
+  if (!fScoringVolume)
+  {
+    const ExXRTG4DetectorConstruction *detectorConstruction = static_cast<const ExXRTG4DetectorConstruction *>(G4RunManager::GetRunManager()->GetUserDetectorConstruction());
+    fScoringVolume = detectorConstruction->GetScoringVolume();
+    std::cout << "Set ScoringVolume: " << fScoringVolume << std::endl;
+  }
+
+  G4LogicalVolume *volume = aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+  //std::cout << volume << std::endl;
+  if (volume != fScoringVolume)
+  {
+    //std::cout << "ThisVolume: " << volume << " is NotTargetBox" << std::endl;
+    return;
+  }
+  //std::cout << "ThisVolume: " << volume << " is TargetBox" << std::endl;
 
   const G4Track *aTrack = aStep->GetTrack();
 
@@ -54,9 +71,13 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
   writing_file.open(filepath, std::ios::app);
   double lx, ly;
 
+  //std::cout << "DataSize" << std::endl;
+  //std::cout << data.size() << std::endl;
   for (size_t k = 0; k != data.size(); ++k)
   {
     const G4XrayUserTrackInformation::interaction_data_t &idata = data[k];
+    //std::cout << "data" << std::endl;
+    //std::cout << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << k << " " << lx << " " << ly << std::endl;
 
     if (k == 0)
     {

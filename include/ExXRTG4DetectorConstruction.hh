@@ -37,11 +37,13 @@ public:
   ExXRTG4DetectorConstruction(G4XraySpecularReflectingSurface *);
   virtual ~ExXRTG4DetectorConstruction();
   virtual G4VPhysicalVolume *Construct();
+  G4LogicalVolume GetScoringVolume();
 
 private:
   G4XraySpecularReflectingSurface *xray_surface_property;
   G4LogicalVolume *Si_Pore;
   G4LogicalVolume *Spoke_L;
+  G4LogicalVolume *fScoringVolume;
 };
 
 #endif // EXXRTG4DETECTORCONSTRUCTION_HH
