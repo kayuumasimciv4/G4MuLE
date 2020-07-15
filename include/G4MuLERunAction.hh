@@ -4,7 +4,7 @@
 #include "G4UserRunAction.hh"
 #include "globals.hh"
 #include "G4GenericMessenger.hh"
-
+#include "time.h"
 class G4MuLERunAction;
 class G4Run;
 
@@ -24,6 +24,8 @@ private:
   G4GenericMessenger *fMessenger;
   std::string outputname;
   std::string dirname;
+  clock_t start;
+  clock_t end;
 };
 
 #endif

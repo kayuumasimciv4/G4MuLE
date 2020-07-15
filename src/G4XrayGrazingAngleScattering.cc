@@ -45,19 +45,19 @@ using namespace std;
 
 namespace
 {
-// internal use
+  // internal use
 
-// verbosity threshold for the physical process
-enum
-{
-  silent = 0,
-  physics_details = 2,
-  surface_details = 5,
-  track_details = 8,
-  all_details = 10
-};
+  // verbosity threshold for the physical process
+  enum
+  {
+    silent = 0,
+    physics_details = 2,
+    surface_details = 5,
+    track_details = 8,
+    all_details = 10
+  };
 
-const G4String myname("G4XrayGrazingAngleScattering");
+  const G4String myname("G4XrayGrazingAngleScattering");
 
 } // namespace
 
@@ -464,6 +464,11 @@ G4VParticleChange *G4XrayGrazingAngleScattering::PostStepDoIt(const G4Track &aTr
   switch (theMode)
   {
   case particle:
+    if (std::isnan(reflectivity))
+    {
+      kill_track = true;
+      G4cout << "Reflectivity is not able to calclated. track is killed.";
+    }
     if (G4UniformRand() >= reflectivity)
       kill_track = true;
     if (track_info)

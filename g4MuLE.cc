@@ -23,8 +23,9 @@
 
 // This is an example showing how to make use of the X-ray grazing
 // angle scattering process.
+#include "G4MTRunManager.hh"
+
 #include "G4SystemOfUnits.hh"
-#include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "G4VisManager.hh"
 #include "G4UIsession.hh"
@@ -53,7 +54,8 @@ int main(int argc, char *argv[])
             ui = new G4UIExecutive(argc, argv);
       }
 
-      G4RunManager *runManager = new G4RunManager;
+      G4MTRunManager *runManager = new G4MTRunManager;
+      runManager->SetNumberOfThreads(10);
 
       // micro-roughness reduces the reflectivity;
       const G4double micro_roughness = 1 * nm;

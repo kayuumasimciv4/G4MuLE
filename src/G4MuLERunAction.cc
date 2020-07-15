@@ -13,6 +13,7 @@
 #include <fstream> // ifstream, ofstream
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <time.h>
 
 G4MuLERunAction::G4MuLERunAction()
     : G4UserRunAction(),
@@ -70,9 +71,15 @@ void G4MuLERunAction::BeginOfRunAction(const G4Run *)
   writing_file << "LEopticsEffAreaSize: " << G4GeometryConstants::Geteffarea_size() << std::endl;
   writing_file << "RandomizeFraction: " << G4GeometryConstants::Getrandomize_fraction() << std::endl;
   writing_file << "########## PhotonData ##########" << std::endl;
+  start = clock();
 }
 void G4MuLERunAction::EndOfRunAction(const G4Run *)
 {
+
+  time_t timer;
+  struct tm *t_st;
+  time(&timer);
+  printf("現在時刻: %s\n", ctime(&timer));
 }
 
 void G4MuLERunAction::DefineCommands()
