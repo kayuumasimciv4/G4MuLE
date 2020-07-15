@@ -87,7 +87,7 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
 
     if ((idata.position[2] <= 0. + 5) && (idata.position[2] >= 0. - 5))
     {
-      writing_file << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << k << " " << lx << " " << ly << std::endl;
+      writing_file << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << aTrack->GetKineticEnergy() / keV << " " << lx << " " << ly << std::endl;
     }
   }
 }
