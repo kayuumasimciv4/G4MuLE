@@ -30,7 +30,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4GenericMessenger.hh"
 #include "G4SystemOfUnits.hh"
-
+#include "Randomize.hh"
 #include "IParticleSource.hh"
 #include "PointSource.hh"
 
