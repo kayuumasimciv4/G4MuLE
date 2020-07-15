@@ -33,6 +33,7 @@
 #include "G4UserRunAction.hh"
 #include "G4MuLERunAction.hh"
 #include "ExXRTG4DetectorConstruction.hh"
+#include "G4SystemOfUnits.hh"
 
 ExXRTG4SteppingAction::ExXRTG4SteppingAction()
     : G4UserSteppingAction(),
