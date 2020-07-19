@@ -75,8 +75,8 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 
   auto dir = source->GetParticleMomentum();
   auto start = source->GetParticlePosition();
-  //energy = (G4UniformRand() * 1.5 + 0.5) * keV;
-  energy = 0.5 * keV;
+  energy = (G4UniformRand() * 1.5 + 0.5) * keV;
+  //energy = 0.5 * keV;
   particleGun->SetParticleEnergy(energy);
   particleGun->SetParticlePosition(start);
   particleGun->SetParticleMomentumDirection(-dir);

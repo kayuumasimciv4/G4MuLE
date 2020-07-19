@@ -18,8 +18,9 @@
 G4MuLERunAction::G4MuLERunAction()
     : G4UserRunAction(),
       fMessenger(nullptr),
+      dirname("Data"),
       outputname("text.txt"),
-      energy(0.5),
+      energy(0.5 * keV),
       angle_x(0),
       angle_y(0),
       plateid(0)
@@ -37,7 +38,6 @@ void G4MuLERunAction::BeginOfRunAction(const G4Run *)
     std::cout << "Master Thread Start" << std::endl;
 
     struct stat st;
-    dirname = "Data";
 
     int ret = stat(dirname.c_str(), &st);
     if (0 == ret)
@@ -72,6 +72,7 @@ void G4MuLERunAction::BeginOfRunAction(const G4Run *)
     writing_file << "LEopticsEffAreaSize: " << G4GeometryConstants::Geteffarea_size() << std::endl;
     writing_file << "RandomizeFraction: " << G4GeometryConstants::Getrandomize_fraction() << std::endl;
     writing_file << "########## PhotonData ##########" << std::endl;
+    writing_file.close();
     start = clock();
   }
   else
@@ -88,6 +89,10 @@ void G4MuLERunAction::EndOfRunAction(const G4Run *)
 {
   if (IsMaster())
   {
+    end = clock();
+    const double timefor = static_cast<double>(end - start) / CLOCKS_PER_SEC / 60;
+    printf("time %lf[min]\n", timefor);
+
     time_t timer;
     struct tm *t_st;
     time(&timer);

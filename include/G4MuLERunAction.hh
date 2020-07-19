@@ -23,8 +23,8 @@ public:
 private:
   void DefineCommands();
   G4GenericMessenger *fMessenger;
-  std::string outputname;
   std::string dirname;
+  std::string outputname;
   clock_t start;
   clock_t end;
   G4double energy;
