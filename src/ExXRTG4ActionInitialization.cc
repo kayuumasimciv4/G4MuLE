@@ -16,6 +16,7 @@ ExXRTG4ActionInitialization::~ExXRTG4ActionInitialization()
 
 void ExXRTG4ActionInitialization::BuildForMaster() const
 {
+  SetUserAction(new G4MuLERunAction);
 }
 
 void ExXRTG4ActionInitialization::Build() const

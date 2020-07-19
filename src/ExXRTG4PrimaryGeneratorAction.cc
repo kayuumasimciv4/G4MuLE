@@ -56,7 +56,7 @@ ExXRTG4PrimaryGeneratorAction::ExXRTG4PrimaryGeneratorAction()
 
   fgamma = particleTable->FindParticle("gamma");
   particleGun->SetParticleDefinition(fgamma);
-  DefineCommands();
+  //DefineCommands();
 }
 
 ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
@@ -75,13 +75,14 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 
   auto dir = source->GetParticleMomentum();
   auto start = source->GetParticlePosition();
-  energy = (G4UniformRand() * 1.5 + 0.5) * keV;
+  //energy = (G4UniformRand() * 1.5 + 0.5) * keV;
+  energy = 0.5 * keV;
   particleGun->SetParticleEnergy(energy);
   particleGun->SetParticlePosition(start);
   particleGun->SetParticleMomentumDirection(-dir);
   particleGun->GeneratePrimaryVertex(anEvent);
 }
-
+/*
 void ExXRTG4PrimaryGeneratorAction::DefineCommands()
 {
   fMessenger = new G4GenericMessenger(this,
@@ -112,3 +113,4 @@ void ExXRTG4PrimaryGeneratorAction::DefineCommands()
   plateIDCmd.SetParameterName("pID", true);
   plateIDCmd.SetDefaultValue("0");
 }
+*/

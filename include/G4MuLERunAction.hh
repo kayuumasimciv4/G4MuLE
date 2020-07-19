@@ -5,6 +5,7 @@
 #include "globals.hh"
 #include "G4GenericMessenger.hh"
 #include "time.h"
+
 class G4MuLERunAction;
 class G4Run;
 
@@ -26,6 +27,10 @@ private:
   std::string dirname;
   clock_t start;
   clock_t end;
+  G4double energy;
+  G4double angle_x;
+  G4double angle_y;
+  G4int plateid;
 };
 
 #endif
