@@ -65,7 +65,7 @@ G4double G4XraySpecularReflectingSurface::reflect(G4double photonEnergy,
                                                   G4ThreeVector &surfaceNormal,
                                                   G4ThreeVector &photonDirection,
                                                   const G4ThreeVector & // photonPosition
-                                                  ) const
+) const
 {
   if (photonEnergy <= 0)
   {
@@ -83,12 +83,13 @@ G4double G4XraySpecularReflectingSurface::reflect(G4double photonEnergy,
   else
   {
     G4XrayGrazingAngleScattering::ReflectivityFromVacuum(grazinga, postRefractionIndex, reflectivity);
-    /*
+
     const G4double specular_fraction = G4XrayGrazingAngleScattering::SpecularFraction(photonEnergy,
                                                                                       grazinga, m_roughness, postRefractionIndex);
-    */
-    const G4double specular_fraction = G4XrayGrazingAngleScattering::SpecularFraction(photonEnergy,
+
+    /*const G4double specular_fraction = G4XrayGrazingAngleScattering::SpecularFraction(photonEnergy,
                                                                                       grazinga, m_roughness);
+    */
     reflectivity *= specular_fraction;
   }
   specular_reflect(surfaceNormal, photonDirection);

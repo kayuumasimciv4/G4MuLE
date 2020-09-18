@@ -64,8 +64,8 @@ public:
                                      G4double &unpolarizedReflectivity);
 
   // Specular fraction
-  //static G4double SpecularFraction(G4double energy, G4double grazing_angle, G4double roughness,G4complex reflactionIndex);
-  static G4double SpecularFraction(G4double energy, G4double grazing_angle, G4double roughness);
+  static G4double SpecularFraction(G4double energy, G4double grazing_angle, G4double roughness, G4complex reflactionIndex);
+  //static G4double SpecularFraction(G4double energy, G4double grazing_angle, G4double roughness);
 
   // This is the possible interface
   //   static void reflectance(G4double energy, G4double grazingAngle, G4complex preRefractionIndex, G4complex postRefractionIndex,

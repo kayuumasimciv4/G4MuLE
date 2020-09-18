@@ -612,7 +612,7 @@ void G4XrayGrazingAngleScattering::ReflectivityFromVacuum(G4double grazingAngle,
 // }
 
 //
-/*
+
 G4double G4XrayGrazingAngleScattering::SpecularFraction(G4double energy, G4double grazingAngle, G4double rmsRoughness, G4complex reflactionIndex)
 {
 
@@ -653,8 +653,8 @@ G4double G4XrayGrazingAngleScattering::SpecularFraction(G4double energy, G4doubl
   const G4double specular_fraction = std::exp(-exponent.real());
   return specular_fraction;
 }
-*/
 
+/*
 G4double G4XrayGrazingAngleScattering::SpecularFraction(G4double energy, G4double grazingAngle, G4double rmsRoughness)
 {
 
@@ -695,3 +695,4 @@ G4double G4XrayGrazingAngleScattering::SpecularFraction(G4double energy, G4doubl
   const G4double specular_fraction = std::exp(-exponent);
   return specular_fraction;
 }
+*/
