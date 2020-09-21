@@ -94,6 +94,66 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
                         0);              //overlaps checking
 
   //---------------------------------------
+  //shield placement
+  G4double shield_height = 25 * cm;
+  G4VSolid *Shield_World_S1 = new G4Box("Shield_W_S", 0.5 * cm, 15 * cm, shield_height / 2);
+
+  G4LogicalVolume *Shield_World_L_1 = new G4LogicalVolume(Shield_World_S1, vacuum, "Shield_W_L");
+
+  G4VSolid *Shield_S = new G4Box("Shield_S", 0.5 * cm, 15 * cm, shield_height / 2);
+  G4LogicalVolume *Shield_L = new G4LogicalVolume(Shield_S, si, "Spoke_L");
+  new G4LogicalSkinSurface("SpokeSurface", Shield_L, xray_surface_property);
+  new G4PVPlacement(0, G4ThreeVector(0, 0, 0 * cm), Shield_L, "shield", Shield_World_L_1, false, 0, 0);
+
+  G4RotationMatrix myRot_shield = G4RotationMatrix();
+  myRot_shield.rotateZ(0);
+  auto position_shield = G4ThreeVector(15 * cm, 0, shield_height / 2);
+  auto trans_shield = G4Transform3D(myRot_shield, position_shield);
+
+  new G4PVPlacement(
+      trans_shield,
+      Shield_World_L_1,
+      "ShieldWorld",
+      logicWorld,
+      false,
+      4,
+      0);
+
+  position_shield = G4ThreeVector(-15 * cm, 0, shield_height / 2);
+  trans_shield = G4Transform3D(myRot_shield, position_shield);
+  new G4PVPlacement(
+      trans_shield,
+      Shield_World_L_1,
+      "ShieldWorld",
+      logicWorld,
+      false,
+      5,
+      0);
+
+  myRot_shield.rotateZ(90 * deg);
+  position_shield = G4ThreeVector(0, 15 * cm, shield_height / 2);
+  trans_shield = G4Transform3D(myRot_shield, position_shield);
+  new G4PVPlacement(
+      trans_shield,
+      Shield_World_L_1,
+      "ShieldWorld",
+      logicWorld,
+      false,
+      6,
+      0);
+
+  position_shield = G4ThreeVector(0, -15 * cm, shield_height / 2);
+  trans_shield = G4Transform3D(myRot_shield, position_shield);
+  new G4PVPlacement(
+      trans_shield,
+      Shield_World_L_1,
+      "ShieldWorld",
+      logicWorld,
+      false,
+      7,
+      0);
+
+  //--------------------------------------
 
   //spoke placement
   G4VSolid *Spoke_World_S = new G4Box("Spoke_W_S", effarea_size / 2, effarea_size / 2, spoke_thickness / 2);
@@ -110,7 +170,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
     myRot.rotateZ(15 * spokeid * deg);
     G4ThreeVector position = G4ThreeVector(0, 0, 0);
     G4Transform3D trans = G4Transform3D(myRot, position);
-    new G4PVPlacement(trans, Spoke_L, "spoke", Spoke_World_L, false, spokeid, 0);
+    //new G4PVPlacement(trans, Spoke_L, "spoke", Spoke_World_L, false, spokeid, 0);
   }
   //---------------------------------------
 
@@ -300,6 +360,7 @@ G4VPhysicalVolume *ExXRTG4DetectorConstruction::Construct()
                       0);              //overlaps checking  }
 
     int cellN = param->GetcellN();
+
     new G4PVParameterised("Si_Wafer", Si_Pore, WorldLog, kXAxis, cellN, param);
 
     new G4PVPlacement(

@@ -60,7 +60,7 @@ public:
   };
 
 private:
-  //void DefineCommands();
+  void DefineCommands();
   G4ParticleGun *particleGun;
   G4GenericMessenger *fMessenger;
   G4ParticleDefinition *fgamma;

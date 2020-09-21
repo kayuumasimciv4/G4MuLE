@@ -33,6 +33,7 @@
 #include "Randomize.hh"
 #include "IParticleSource.hh"
 #include "PointSource.hh"
+#include "CXBSource.hh"
 
 //--------------------------------------------------------------
 
@@ -52,11 +53,12 @@ ExXRTG4PrimaryGeneratorAction::ExXRTG4PrimaryGeneratorAction()
   G4int nofParticles = 1;
   particleGun = new G4ParticleGun(nofParticles);
   G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
-  source = new PointSource(angle_x, angle_y, energy, plateid);
+  //source = new PointSource(angle_x, angle_y, energy, plateid);
+  source = new CXBSource(angle_x, angle_y, energy, plateid);
 
   fgamma = particleTable->FindParticle("gamma");
   particleGun->SetParticleDefinition(fgamma);
-  //DefineCommands();
+  DefineCommands();
 }
 
 ExXRTG4PrimaryGeneratorAction::~ExXRTG4PrimaryGeneratorAction()
@@ -80,11 +82,11 @@ void ExXRTG4PrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
   particleGun->SetParticleMomentumDirection(-dir);
   particleGun->GeneratePrimaryVertex(anEvent);
 }
-/*
+
 void ExXRTG4PrimaryGeneratorAction::DefineCommands()
 {
   fMessenger = new G4GenericMessenger(this,
-                                      "/B1/generator/",
+                                      "/G4MuLE/generator/",
                                       "Primary generator control");
 
   // momentum command
@@ -111,4 +113,3 @@ void ExXRTG4PrimaryGeneratorAction::DefineCommands()
   plateIDCmd.SetParameterName("pID", true);
   plateIDCmd.SetDefaultValue("0");
 }
-*/

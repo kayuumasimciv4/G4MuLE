@@ -70,7 +70,7 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
   auto filepath = runaction_u->GetDirName() + "/" + runaction_u->GetFileName();
   std::ofstream writing_file;
   writing_file.open(filepath, std::ios::app);
-  double lx, ly;
+  double lx, ly, lz, ldx, ldy, ldz;
 
   //std::cout << "DataSize" << std::endl;
   //std::cout << data.size() << std::endl;
@@ -84,11 +84,17 @@ void ExXRTG4SteppingAction::UserSteppingAction(const G4Step *aStep)
     {
       lx = idata.position[0];
       ly = idata.position[1];
+      lz = idata.position[2];
+      ldx = idata.incidentDirection[0];
+      ldy = idata.incidentDirection[1];
+      ldz = idata.incidentDirection[2];
     }
 
     if ((idata.position[2] <= 0. + 5) && (idata.position[2] >= 0. - 5))
     {
-      writing_file << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << aTrack->GetKineticEnergy() / keV << " " << lx << " " << ly << std::endl;
+      //std::cout << "flag Number: " << k << std::endl;
+
+      writing_file << idata.position[0] << " " << idata.position[1] << " " << idata.position[2] << " " << k << " " << idata.incidentDirection[0] << " " << idata.incidentDirection[1] << " " << idata.incidentDirection[2] << " " << aTrack->GetKineticEnergy() / keV << " " << lx << " " << ly << " " << lz << " " << ldx << " " << ldy << " " << ldz << std::endl;
     }
   }
 }
