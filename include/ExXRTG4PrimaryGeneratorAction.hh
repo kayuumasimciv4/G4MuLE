@@ -28,6 +28,7 @@
 #include "globals.hh"
 #include "IParticleSource.hh"
 #include "PointSource.hh"
+#include "TestSource.hh"
 
 class G4ParticleDefinition;
 class G4Event;
@@ -68,6 +69,12 @@ private:
   G4double angle_x;
   G4double angle_y;
   G4int plateid;
+  G4double pos_x;
+  G4double pos_y;
+  G4double pos_z;
+  G4double dir_x;
+  G4double dir_y;
+  G4double dir_z;
   IParticleSource *source;
 };
 
