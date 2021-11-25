@@ -1,8 +1,10 @@
-# $Id: CMakeLists.txt 86065 2014-11-07 08:51:15Z gcosmo $
-
 #----------------------------------------------------------------------------
 # Setup the project
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+#
+cmake_minimum_required(VERSION 3.8...3.18)
+if(${CMAKE_VERSION} VERSION_LESS 3.12)
+  cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+endif()
 project(G4MuLE)
 
 #----------------------------------------------------------------------------
@@ -66,6 +68,16 @@ set(G4MuLE_SCRIPTS
   gui.mac
 
   )
+
+
+  foreach(_script ${G4MuLE_SCRIPTS})
+  configure_file(
+    ${PROJECT_SOURCE_DIR}/${_script}
+    ${PROJECT_BINARY_DIR}/${_script}
+    COPYONLY
+    )
+endforeach()
+
 #----------------------------------------------------------------------------
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
