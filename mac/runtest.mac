@@ -1,9 +1,11 @@
+/run/initialize
 /G4MuLE/runaction/plateid 0
 /G4MuLE/runaction/energy 0.5 keV
 /G4MuLE/runaction/angle_x 0.0 deg
 /G4MuLE/runaction/angle_y 0.0 deg
 /random/setSeeds 1 10
-/G4MuLE/runaction/outputname Data/Test.txt
+/G4MuLE/runaction/outputname test.txt
 /run/beamOn 10000
 
 
+0

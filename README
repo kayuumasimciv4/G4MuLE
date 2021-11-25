@@ -1,3 +1,76 @@
+=====G4MuLE README======
+
+# Installation
+mkdir path/to/build_directory
+cd path/to/build_directory
+cmake path/to/G4MuLE
+make
+
+
+
+# Usage
+cd path/to/build_directory
+./g4MuLE      #viewerありの立ち上げ
+
+./g4MuLE path/to/macrofile    #macrofileをbatchモードで実行
+
+
+
+# Macrofile
+# example file path: mac/runtest.mac
+
+./g4MuLE mac/runtest.mac     #テスト用macrofileの実行
+
+
+
+# Output file
+
+=============Example==============
+***********************************************************************************
+* ########## GeneratedPhotonInfo ##########
+* seed: 1                                   #使用したseed値
+* TotalPhoton: 10000                        #照射した全光子数
+* IncidentAngleX[rad]: 0                    #入射角 (X)
+* IncidentAngleY[rad]: 0                    #入射角 (Y)
+* SettingEnergy[MeV]: 0.0005                #入射光子のエネルギー
+* FocusedPlateID: 0                         #照射したLEプレートの番号
+* ########## LEopticsGeometoryInfo [mm] ##########
+* FocalLength: 300                          #焦点距離
+* WaferThickness: 0.3                       #LE厚み
+* PoreSize: 0.04                            #Poreのサイズ
+* HoleSize: 0.02                            #Poreの穴のサイズ
+* SpokeWidth: 0.3                           #放射状Spokeの幅
+* SpokeThickness: 0.001                     #放射状Spokeの厚み
+* PlateSize: 100                            #LEプレート一辺の大きさ
+* LEopticsEffAreaSize: 90                   #LEプレート中の穴が存在する領域の面積
+* RandomizeFraction: 12.8                   #Poreの配置角度のゆらぎ
+* ########## PhotonData ##########          #検出器面での光子データ
+* -0.979323 15.0933 0 6 -0.0650055 5.40616e-05 -0.997885 0.5 18.642 15.077
+* 0.569555 0.0583856 0 8 0.13169 0.0817489 -0.987914 0.5 -39.4179 -24.7567
+* .
+* .
+* .
+**********************************************************************************
+
+========PhotonData columns詳細=========
+#x座標(検出器面) y座標(検出器面) z座標(検出器面) 反射回数に対応したindex 光子の入射角X(検出器面) 光子の入射角Y(検出器面) 光子のエネルギー x座標(照射位置) y座標(照射位置)
+
+#反射回数に応じたindex = 反射回数*2+4
+#4: 0回反射
+#6: 1回反射
+#8: 2回反射
+#.
+#.
+
+
+
+
+
+
+
+
+
+
 
 Leiden, October 14, 2009
 ========================

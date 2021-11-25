@@ -66,7 +66,7 @@ set(G4MuLE_SCRIPTS
   vis.mac
   init_vis.mac
   gui.mac
-
+  mac/runtest.mac
   )
 
 
