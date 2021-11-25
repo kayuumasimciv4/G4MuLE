@@ -66,20 +66,11 @@ set(G4MuLE_SCRIPTS
   gui.mac
 
   )
-
-foreach(_script ${G4MuLE_SCRIPTS})
-  configure_file(
-    ${PROJECT_SOURCE_DIR}/${_script}
-    ${PROJECT_BINARY_DIR}/${_script}
-    COPYONLY
-    )
-endforeach()
-
 #----------------------------------------------------------------------------
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(G4MuLE DEPENDS g4MuLE)
+#add_custom_target(G4MuLE DEPENDS g4MuLE)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
